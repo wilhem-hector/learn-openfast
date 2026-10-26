@@ -147,3 +147,11 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# OpenFAST course
+/runs/*
+!/runs/.gitkeep
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
