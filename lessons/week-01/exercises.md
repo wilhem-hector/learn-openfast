@@ -40,18 +40,23 @@ If OpenFAST is not on PATH, locate your known executable and use its absolute pa
 
 ## Exercise 3 — Run and interpret
 
-**Question:** what evidence supports calling this run successful?
+**Question:** what does this simulation show, and what conclusions does the evidence support?
 
-1. Make a documented working case from the compatible baseline. Record input changes, model revision, executable identity, command, working directory, wind/wave settings, and random seeds where relevant.
-2. Inspect duration and output settings. Run the startup check, then produce a short 60–120 s record for learning output interpretation, provided all input fields cover that interval. This duration is not prescribed for later scientific statistics.
+1. Use a working copy of the IEA 15-MW/VolturnUS-S case that passed your startup check: `Examples/Test_Cases/IEA-15-240-RWT/IEA-15-240-RWT-UMaineSemi/IEA-15-240-RWT-UMaineSemi.fst` in ROSCO v2.10.6. Copy the whole parent `IEA-15-240-RWT` directory to preserve shared inputs. Record the source revision, input changes, executable identity, command, working directory, wind/wave settings, and random seeds.
+2. Set `TMax = 120` s and `TStart = 0` in the copied case, checking that time-dependent inputs cover that interval. Keep the physical conditions, initial conditions, controller settings, and integration step unchanged. A completed startup check need not be repeated separately.
 3. Inspect the terminal log and every warning. Confirm that time reaches the requested end, requested channels exist, and numerical data are finite.
 4. Select three available channels: rotor speed, a platform motion, and one load. Identify each channel's module, units, frame, sign, and location from the version-matched documentation. Request missing outputs explicitly.
-5. Load the output in Python or MATLAB and make three labelled time-series plots. A documented reader is acceptable; if using text output, inspect the header before deciding where numerical rows begin.
-6. Repeat the identical case. Compare the selected channels quantitatively at matching times. Explain discrepancies rather than assuming exact agreement across different builds or hardware.
+5. Load the output in Python or MATLAB and make labelled time-series plots. A documented reader is acceptable; if using text output, inspect the header before deciding where numerical rows begin.
+6. For a repeatability check, save the first outputs and rerun the same case on the same computer, with identical inputs, seeds, executable, and controller. Compare each selected channel at common simulation times and report its maximum absolute difference, with units. No second computer or different build is required. If you skip this check, record repeatability as not tested.
 
-**Before running:** predict the initial values from the inputs where possible. State what you expect to be transient and what evidence you would need to establish stationarity.
+**Before running:** predict initial signal values where possible and identify which responses you expect to contain startup transients.
 
-**Save:** plots, analysis code/notebook, the run record, and repeatability evidence. Explain why a structural root moment cannot by itself establish the aerodynamic mechanism. Do not treat short-record averages or peaks as representative sea-state statistics.
+**Interpretation — answer these two general questions in a short paragraph each:**
+
+- **Observation versus cause:** explain why a measured response does not necessarily identify its cause. Using one of your plots as an illustration, separate what you observe from your proposed explanation. Name an additional signal or controlled comparison that could test that explanation. You do not need to run that additional test in this exercise.
+- **Record statistics versus sea-state statistics:** explain why averages and peaks from one short run may not represent the sea state as a whole. A peak is a valid statistic of this particular record; it is not automatically a characteristic or extreme value for the wider sea state. State the time window used and recognise the effects of startup, finite duration, and the particular random wave realisation. No statistical convergence study is required here.
+
+**Save:** plots, analysis code/notebook, the run record, the two interpretation paragraphs, and repeatability results if the check was performed.
 
 ## Exercise 4 — Controlled output sampling
 
