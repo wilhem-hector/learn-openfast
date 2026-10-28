@@ -20,7 +20,9 @@ A path starting with ../ is interpreted relative to the referring file because t
 All of the DoFs are enabled except for the Blade pitch, Rotor teeter (which is not used for 3blades), drivetrain rotational flexibility, and yaw.
 
 The rotor is allowed to move in most direction. I am surprised that the pitch is not enabled, because it seems like we define a pitch control mode in the controller
+1. With PitchDOF = False, ElastoDyn prescribes the received pitch angle rather than solving a mechanical pitch-actuator degree of freedom. ROSCO provides this
 
+# TODO
 I ultimate have to be able to visualize what each of the enabled DOF are
 
 # Startup run
