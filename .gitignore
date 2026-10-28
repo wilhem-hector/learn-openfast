@@ -155,3 +155,6 @@ __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 .venv/
+
+# Materials from the NREL workshop
+nrel_workshop/
