@@ -4,10 +4,14 @@ Adaption of the standalone script to read an ASCII OpenFAST output and plot some
 Contact: Wilhem Hector
 Initially written by: E Branlard
 """
-import os
-import numpy as np
 import matplotlib.pyplot as plt
 from openfast_toolbox.io import FASTOutputFile
+
+# Apply the shared style for both package imports and standalone use.
+if __package__:
+    from . import figureSettings
+else:
+    import figureSettings
 
 # --- Example Parameters
 # outfile      = 'Main.out'
@@ -30,10 +34,12 @@ def plot_couple_channels(outfile, plotChannels):
     nPlots = len(plotChannels)
     time = data[:,0]
 
-    fig,axes = plt.subplots(nPlots, 1, sharex=True, figsize=(6.4,8))
-    fig.subplots_adjust(left=0.12, right=0.95, top=0.98, bottom=0.05, hspace=0.20, wspace=0.20)
+    fig,axes = plt.subplots(
+        nPlots, 1, sharex=True, squeeze=False,
+        figsize=(12, 3.5 * nPlots), layout="constrained"
+    )
 
-    for _, (ax, chan) in enumerate(zip(axes, plotChannels)):
+    for ax, chan in zip(axes[:, 0], plotChannels):
         # Find index of plot channel within data
         id = channels.index(chan)
         ax.plot(time, data[:,id])
@@ -41,3 +47,4 @@ def plot_couple_channels(outfile, plotChannels):
         ax.set_ylabel(channels[id] + ' ' + units[id])
         ax.grid()
     plt.show()
+    return fig, axes[:, 0]
